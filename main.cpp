@@ -1,17 +1,8 @@
-#include <stdio.h>
-#include <raylib/raylib.h>
+#include "src/core/app.h"
 
 int main(void) {
-	InitWindow(400, 400, "Test Window!");
-
-	while (!WindowShouldClose()) {
-		BeginDrawing();
-		ClearBackground(BLACK);
-		DrawFPS(0, 0);
-		EndDrawing();
-	}
-
-	CloseWindow();
-
+	ppp_core::InitApp(1280, 720, "Pomodoro Puyo Puyo - Hacklahoma 2025");
+	ppp_core::RunApp();
+	ppp_core::CloseApp();
 	return 0;
 }

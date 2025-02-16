@@ -132,9 +132,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\core\app.cpp" />
+    <ClCompile Include="src\puyo\blah.cpp" />
+    <ClCompile Include="src\puyo\game.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\core\app.h" />
+    <ClInclude Include="src\core\consts.h" />
+    <ClInclude Include="src\core\math.h" />
+    <ClInclude Include="src\core\types.h" />
+    <ClInclude Include="src\pomo\clock.h" />
+    <ClInclude Include="src\puyo\consts.h" />
+    <ClInclude Include="src\puyo\game.h" />
+    <ClInclude Include="src\puyo\types.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
