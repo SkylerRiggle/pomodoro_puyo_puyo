@@ -3,6 +3,7 @@
 #include "math.h"
 #include "consts.h"
 #include "../puyo/game.h"
+#include "../pomo/clock.h"
 #include <raylib/raylib.h>
 #include <stdio.h>
 
@@ -18,25 +19,45 @@ void ppp_core::InitApp(const uint32 default_width, const uint32 default_height, 
 }
 
 void ppp_core::RunApp() {
-	ppp_puyo::StartGame();
+	bool is_pomo = true;
+	const float pomo_interval = 5.0f;//1800.0f;
+	const int8 max_rounds = 4;
+	int8 round_count = 0;
 
-	while (!WindowShouldClose()) {
+	ppp_pomo::Start(pomo_interval);
+
+	while (!WindowShouldClose() && round_count < max_rounds) {
 		const float delta_time = GetFrameTime();
 		const float screen_scale = MIN(
 			(float)GetScreenWidth() / ppp_core::GAME_SCREEN_WIDTH_F,
 			(float)GetScreenHeight() / ppp_core::GAME_SCREEN_HEIGHT_F
 		);
-
-		ppp_puyo::UpdateGame(delta_time);
+		
+		if (is_pomo) {
+			if (!ppp_pomo::Update(delta_time)) {
+				is_pomo = false;
+				ppp_puyo::StartGame();
+			}
+		}
+		else {
+			if (!ppp_puyo::UpdateGame(delta_time)) {
+				is_pomo = true;
+				ppp_pomo::Start(pomo_interval);
+				round_count++;
+			}
+		}
 
 		BeginTextureMode(render);
+
 		ClearBackground(SKYBLUE);
-		ppp_puyo::DrawGame();
-		DrawFPS(0, 0);
+
+		ppp_pomo::Draw();
+		if (!is_pomo) ppp_puyo::DrawGame();
+
 		EndTextureMode();
 
 		BeginDrawing();
-		ClearBackground(RED);
+		ClearBackground(BLACK);
 		DrawTexturePro(
 			render.texture,
 			{ 0.0f, 0.0f, (float)render.texture.width, (float)-render.texture.height },

@@ -2,9 +2,9 @@
 #define PPP_POMO_CLOCK_H
 
 namespace ppp_pomo {
-	class PomoClock {
-
-	};
+	void Start(const float total_time);
+	bool Update(const float delta_time);
+	void Draw();
 }
 
 #endif // ! PPP_POMO_CLOCK_H

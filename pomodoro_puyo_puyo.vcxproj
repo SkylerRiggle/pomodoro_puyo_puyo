@@ -133,6 +133,7 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="src\core\app.cpp" />
+    <ClCompile Include="src\pomo\clock.cpp" />
     <ClCompile Include="src\puyo\blah.cpp" />
     <ClCompile Include="src\puyo\game.cpp" />
   </ItemGroup>

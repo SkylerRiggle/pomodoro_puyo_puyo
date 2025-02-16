@@ -17,6 +17,7 @@ namespace ppp_puyo {
 		Bean edge_bean;
 
 		float fall_timer;
+		uint8 rotation;
 
 		bool can_move;
 	};

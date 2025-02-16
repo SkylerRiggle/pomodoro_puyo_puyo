@@ -24,7 +24,6 @@ namespace ppp_puyo {
 		GREEN_BEAN,
 		BLUE_BEAN,
 		YELLOW_BEAN,
-		STONE_BEAN,
 
 		NUM_COLORS,
 
@@ -35,8 +34,7 @@ namespace ppp_puyo {
 		RED,
 		GREEN,
 		BLUE,
-		YELLOW,
-		LIGHTGRAY
+		YELLOW
 	};
 }
 

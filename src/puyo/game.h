@@ -3,7 +3,7 @@
 
 namespace ppp_puyo {
 	void StartGame();
-	void UpdateGame(const float delta_time);
+	bool UpdateGame(const float delta_time);
 	void DrawGame();
 }
 
