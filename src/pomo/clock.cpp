@@ -2,6 +2,7 @@
 
 #include <raylib/raylib.h>
 #include "../core/consts.h"
+#include <stdio.h>
 
 float max_time, anim_timer = 0.0f, walk_timer = 0.0f, pomo_timer;
 
@@ -33,6 +34,8 @@ bool ppp_pomo::Update(const float delta_time) {
 	if (walk_timer > 1.0f) {
 		walk_timer -= 1.0f;
 	}
+
+	printf("Time Elapsed: %.2f / %.2f\n", pomo_timer, max_time);
 
 	return pomo_timer < max_time;
 }
