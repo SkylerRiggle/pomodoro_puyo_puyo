@@ -8,6 +8,7 @@ bool is_playing;
 float game_tick_time;
 ppp_puyo::Player human;
 const int32 BEAN_PLACED = -999;
+Texture2D puyo_texture;
 
 static ppp_puyo::Bean& IndexGrid(ppp_puyo::Player& player, const int32 x_idx, const int32 y_idx) {
 	return player.grid[x_idx + (ppp_puyo::GRID_COLS * y_idx)];
@@ -69,6 +70,9 @@ void ppp_puyo::StartGame() {
 	// Init game state
 	game_tick_time = 0.5f;
 	is_playing = true;
+
+	// Load textures
+	puyo_texture = LoadTexture("./assets/puyo.png");
 }
 
 static void HandleBlockMovement(ppp_puyo::Player& player, const int8 x_move, const int8 y_move) {
@@ -339,7 +343,7 @@ static void HandleBlockRotation(ppp_puyo::Player& player) {
 bool ppp_puyo::UpdateGame(const float delta_time) {
 	// Update fall timers
 	human.fall_timer += delta_time;
-	game_tick_time = MAX(game_tick_time - 0.1f * delta_time / 30.0f, 0.1f);
+	game_tick_time = MAX(game_tick_time - 0.1f * delta_time / 10.0f, 0.1f);
 
 	bool y_input = false;
 	if (human.fall_timer >= game_tick_time) {
@@ -390,28 +394,40 @@ static void DrawPlayer(
 		ppp_puyo::Bean& bean = player.grid[idx];
 		if (bean.type == ppp_puyo::BeanType::EMPTY_BEAN) continue;
 
-		DrawRectangle(
-			bean.x_pos + x_origin,
-			bean.y_pos + y_origin,
-			ppp_puyo::BEAN_SIZE,
-			ppp_puyo::BEAN_SIZE,
+		DrawTexturePro(
+			puyo_texture,
+			{ 0.0f, 0.0f, 32.0f, 32.0f },
+		{
+			x_origin + (float)bean.x_pos,
+			y_origin + (float)bean.y_pos,
+			ppp_puyo::BEAN_SIZE, ppp_puyo::BEAN_SIZE },
+			{ 0.0f, 0.0f },
+			0.0f,
 			ppp_puyo::BeanColors[bean.type]
-		);
+			);
 	}
 
 	// Draw moving beans
-	DrawRectangle(
-		player.pivot_bean.x_pos * ppp_puyo::BEAN_SIZE + x_origin,
-		player.pivot_bean.y_pos * ppp_puyo::BEAN_SIZE + y_origin,
-		ppp_puyo::BEAN_SIZE,
-		ppp_puyo::BEAN_SIZE,
+	DrawTexturePro(
+		puyo_texture,
+		{ 0.0f, 0.0f, 32.0f, 32.0f },
+		{ 
+			x_origin + (float)player.pivot_bean.x_pos * ppp_puyo::BEAN_SIZE,
+			y_origin + (float)player.pivot_bean.y_pos * ppp_puyo::BEAN_SIZE,
+			ppp_puyo::BEAN_SIZE, ppp_puyo::BEAN_SIZE },
+		{ 0.0f, 0.0f },
+		0.0f,
 		ppp_puyo::BeanColors[player.pivot_bean.type]
 	);
-	DrawRectangle(
-		player.edge_bean.x_pos * ppp_puyo::BEAN_SIZE + x_origin,
-		player.edge_bean.y_pos * ppp_puyo::BEAN_SIZE + y_origin,
-		ppp_puyo::BEAN_SIZE,
-		ppp_puyo::BEAN_SIZE,
+	DrawTexturePro(
+		puyo_texture,
+		{ 0.0f, 0.0f, 32.0f, 32.0f },
+		{
+			x_origin + (float)player.edge_bean.x_pos * ppp_puyo::BEAN_SIZE,
+			y_origin + (float)player.edge_bean.y_pos * ppp_puyo::BEAN_SIZE,
+			ppp_puyo::BEAN_SIZE, ppp_puyo::BEAN_SIZE },
+		{ 0.0f, 0.0f },
+		0.0f,
 		ppp_puyo::BeanColors[player.edge_bean.type]
 	);
 }

@@ -150,6 +150,17 @@
     <ClInclude Include="src\puyo\game.h" />
     <ClInclude Include="src\puyo\types.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\bush.png" />
+    <Image Include="assets\puyo.png" />
+    <Image Include="assets\reptile.png" />
+    <Image Include="assets\walk_octocat.png" />
+    <Image Include="assets\woods.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="audio\pomo_track.wav" />
+    <Media Include="audio\puyo_track.mp3" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

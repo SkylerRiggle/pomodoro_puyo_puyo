@@ -15,7 +15,7 @@ void ppp_core::InitApp(const uint32 default_width, const uint32 default_height, 
 	SetWindowMinSize(320, 240);
 
 	render = LoadRenderTexture(ppp_core::GAME_SCREEN_WIDTH, ppp_core::GAME_SCREEN_HEIGHT);
-	SetTextureFilter(render.texture, TEXTURE_FILTER_POINT);
+	SetTextureFilter(render.texture, TEXTURE_FILTER_BILINEAR);
 }
 
 void ppp_core::RunApp() {
@@ -25,6 +25,8 @@ void ppp_core::RunApp() {
 	int8 round_count = 0;
 
 	ppp_pomo::Start(pomo_interval);
+
+	PlayMusicStream(LoadMusicStream("./audio/pomo_track.wav"));
 
 	while (!WindowShouldClose() && round_count < max_rounds) {
 		const float delta_time = GetFrameTime();
@@ -48,8 +50,6 @@ void ppp_core::RunApp() {
 		}
 
 		BeginTextureMode(render);
-
-		ClearBackground(SKYBLUE);
 
 		ppp_pomo::Draw();
 		if (!is_pomo) ppp_puyo::DrawGame();

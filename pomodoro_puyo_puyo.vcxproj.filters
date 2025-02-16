@@ -60,4 +60,27 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\bush.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\puyo.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\reptile.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\walk_octocat.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\woods.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="audio\pomo_track.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="audio\puyo_track.mp3" />
+  </ItemGroup>
 </Project>
